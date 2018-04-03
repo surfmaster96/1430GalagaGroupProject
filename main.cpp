@@ -17,7 +17,6 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    bool stopped = false;
     bool One, Two, Three;
     One = Two = Three = false;
     int count1 = 0, columen;
@@ -31,7 +30,7 @@ int main(int argc, char** argv)
     Color color1;
     int Move = 0;
     char key;
-    double bulletX =200, bulletY = 700;
+    double bulletX =200, bulletY = 680;
     //*************************************************Bullet
     flash bullet1[20];
     Point bullet_1;
@@ -39,8 +38,6 @@ int main(int argc, char** argv)
     int bulletSpeed[20] = {0};
     bool Xchange = false;
     int bulletNum = 0,TempNum = 0;
-    
-    
     
     //**************************************************
     char n;
@@ -63,11 +60,11 @@ int main(int argc, char** argv)
         //************************************************************Location
         location = Point(shipX.x+ReadC,shipX.y+ReadR);
         
-        
         /*
-        If you need more colors, just simply copy the if statement and change 
-        color1's value to make a new color.
-        */
+         If you need more colors, just simply copy the if statement and change
+         color1's value to make a new color.
+         */
+        
         if(n == 'R'){
             color1 = Color(255,0,0);
             
@@ -102,7 +99,7 @@ int main(int argc, char** argv)
         
         
         ReadC++;
-        //Need The Matirx Information!!!  "columen"
+        //Need The Matirx Information!!!
         if(ReadC % columen == 0){
             ReadR++;
             ReadC = 0;
@@ -115,21 +112,21 @@ int main(int argc, char** argv)
     cout <<count1<<endl;
     
     while(!g.getQuit()){
-        
-        
-        if(!stopped){
             frame1.displayframe(count1, Move, frame1, g,bulletX,bulletY);
             if(g.kbhit()){
                 key = g.getKey();
                 switch(key){
                     case ' ':
-                        for(int bulletNum1 = 0; bulletNum1 <20; bulletNum1 ++){
+                        /*
+                        for(int bulletNum1 = 0; bulletNum1 <=20; bulletNum1 ++){
+                            cout <<bulletNum1<<endl;
                             bullet1[bulletNum1].eraseflash(bulletSpeed[bulletNum1], bullet1[bulletNum1], g);
-                            if(bulletNum1 == 20){
+                            if(bulletNum1 > 20){
                                 bulletNum1 = 0;
                             }
+                            cout <<bulletNum1<<endl;
                         }
-                        
+                         */
                         bulletNum = TempNum;
                         bulletOne[bulletNum] = true;
                         TempNum++;
@@ -140,9 +137,14 @@ int main(int argc, char** argv)
                         }
                         bullet_1.y = bulletY;
                         bullet1[bulletNum].setShot(bullet_1);
-                        if(TempNum == 20){
+                        if(TempNum == 5){
                             TempNum = 0;
                         }
+                        //******************************
+                        
+                        
+                        
+                        //**************************
                         break;
                     case RIGHT_ARROW: frame1.eraseframe(count1, Move, frame1, g);
                         Move += 20;
@@ -157,26 +159,64 @@ int main(int argc, char** argv)
             
             //*************************************************Bullet
             //Need Move Ship to get coordinate for bullet. ***FIXED***
-            //Need change Bullet to arrary style to make anothor shot--FIXED.
-            for(int bulletNum1 = 0; bulletNum1 <20; bulletNum1 ++){
-                if(bulletOne[bulletNum1]){
-                    bullet1[bulletNum1].eraseflash(bulletSpeed[bulletNum1], bullet1[bulletNum1],g);
-                    bulletSpeed[bulletNum1] += 5;//*****Bullte Speed***********
+            //Need change Bullet to arrary style to make anothor shot--Partilly FIXED
+            if(bulletOne[1]){
+                    bullet1[1].eraseflash(bulletSpeed[1], bullet1[1],g);
+                    bulletSpeed[1] += 5;//Bullte Speed***********
                     
-                    bullet1[bulletNum1].displayflash(bulletSpeed[bulletNum1], bullet1[bulletNum1], g);
-                    if((bulletSpeed[bulletNum1]) >= 600){
-                        bullet1[bulletNum1].eraseflash(bulletSpeed[bulletNum1], bullet1[bulletNum1],g);
-                        bulletOne[bulletNum1] = false;
-                        bulletSpeed[bulletNum1] = 0;
+                    bullet1[1].displayflash(bulletSpeed[1], bullet1[1], g);
+                    if((bulletSpeed[1]) >= 600){
+                        bullet1[1].eraseflash(bulletSpeed[1], bullet1[1],g);
+                        bulletOne[1] = false;
+                        bulletSpeed[1] = 0;
                     }
-                    if(bulletNum1 == 20){
-                        bulletNum1 = 0;
-                    }
-                    
+                }
+            if(bulletOne[2]){
+                bullet1[2].eraseflash(bulletSpeed[2], bullet1[2],g);
+                bulletSpeed[2] += 5;//Bullte Speed***********
+                
+                bullet1[2].displayflash(bulletSpeed[2], bullet1[2], g);
+                if((bulletSpeed[2]) >= 600){
+                    bullet1[2].eraseflash(bulletSpeed[2], bullet1[2],g);
+                    bulletOne[2] = false;
+                    bulletSpeed[2] = 0;
                 }
             }
+            if(bulletOne[3]){
+                bullet1[3].eraseflash(bulletSpeed[3], bullet1[3],g);
+                bulletSpeed[3] += 5;//Bullte Speed***********
+                
+                bullet1[3].displayflash(bulletSpeed[3], bullet1[3], g);
+                if((bulletSpeed[3]) >= 600){
+                    bullet1[3].eraseflash(bulletSpeed[3], bullet1[3],g);
+                    bulletOne[3] = false;
+                    bulletSpeed[3] = 0;
+                }
+            }
+            if(bulletOne[4]){
+                bullet1[4].eraseflash(bulletSpeed[4], bullet1[4],g);
+                bulletSpeed[4] += 5;//Bullte Speed***********
+                
+                bullet1[4].displayflash(bulletSpeed[4], bullet1[4], g);
+                if((bulletSpeed[4]) >= 600){
+                    bullet1[4].eraseflash(bulletSpeed[4], bullet1[4],g);
+                    bulletOne[4] = false;
+                    bulletSpeed[4] = 0;
+                }
+            }
+            if(bulletOne[0]){
+                bullet1[0].eraseflash(bulletSpeed[0], bullet1[0],g);
+                bulletSpeed[0] += 5;//Bullte Speed***********
+                
+                bullet1[0].displayflash(bulletSpeed[0], bullet1[0], g);
+                if((bulletSpeed[0]) >= 600){
+                    bullet1[0].eraseflash(bulletSpeed[0], bullet1[0],g);
+                    bulletOne[0] = false;
+                    bulletSpeed[0] = 0;
+                }
+            }
+            //***********************************************************
             g.update();
-        }
         //cin.get();
         
         //g.Sleep(10);
@@ -194,8 +234,12 @@ int main(int argc, char** argv)
     
     
     /*
-    
-    //those just lecture notes, ignore them, lol
+     
+     
+     
+     //those just lecture notes, ignore them, lol
+     
+     
      Point p1;
      
      //    p1.color.r = 220;
