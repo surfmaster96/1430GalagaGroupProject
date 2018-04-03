@@ -63,6 +63,11 @@ int main(int argc, char** argv)
         //************************************************************Location
         location = Point(shipX.x+ReadC,shipX.y+ReadR);
         
+        
+        /*
+        If you need more colors, just simply copy the if statement and change 
+        color1's value to make a new color.
+        */
         if(n == 'R'){
             color1 = Color(255,0,0);
             
@@ -97,7 +102,7 @@ int main(int argc, char** argv)
         
         
         ReadC++;
-        //Need The Matirx Information!!!
+        //Need The Matirx Information!!!  "columen"
         if(ReadC % columen == 0){
             ReadR++;
             ReadC = 0;
@@ -151,12 +156,12 @@ int main(int argc, char** argv)
             }
             
             //*************************************************Bullet
-            //Need Move Ship to get coordinate for bullet. ***!FIX***
-            //Need change Bullet to arrary style to make anothor shot--changing.
+            //Need Move Ship to get coordinate for bullet. ***FIXED***
+            //Need change Bullet to arrary style to make anothor shot--FIXED.
             for(int bulletNum1 = 0; bulletNum1 <20; bulletNum1 ++){
                 if(bulletOne[bulletNum1]){
                     bullet1[bulletNum1].eraseflash(bulletSpeed[bulletNum1], bullet1[bulletNum1],g);
-                    bulletSpeed[bulletNum1] += 5;//Bullte Speed***********
+                    bulletSpeed[bulletNum1] += 5;//*****Bullte Speed***********
                     
                     bullet1[bulletNum1].displayflash(bulletSpeed[bulletNum1], bullet1[bulletNum1], g);
                     if((bulletSpeed[bulletNum1]) >= 600){
@@ -164,7 +169,7 @@ int main(int argc, char** argv)
                         bulletOne[bulletNum1] = false;
                         bulletSpeed[bulletNum1] = 0;
                     }
-                    if(bulletNum1 == 20 ){
+                    if(bulletNum1 == 20){
                         bulletNum1 = 0;
                     }
                     
@@ -186,7 +191,11 @@ int main(int argc, char** argv)
     
     
     return 0;
+    
+    
     /*
+    
+    //those just lecture notes, ignore them, lol
      Point p1;
      
      //    p1.color.r = 220;
