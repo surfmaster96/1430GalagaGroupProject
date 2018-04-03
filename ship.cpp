@@ -27,6 +27,7 @@ Color Ship::getColor(int x, int y) const{
     return color[x][y];
 }
 //*******Do not use draw or display, because it waste too many RAM and GPU.
+//Using Displayframe function instead.
 void Ship::draw(SDL_Plotter& g){
     for(int j = 0; j < 50; j++){
         for(int i = 0;i <50; i++){
