@@ -72,7 +72,7 @@ int main(int argc, const char * argv[]) {
         
         if(colorChar == 'R') // if it's R
         { // we set to red
-            color1 = Color(255,0,0);
+            color1 = Color(255,30,0);
             
             mainChar.setLocation(readR, readC, location);
             mainChar.setColor(readR, readC, color1);
@@ -80,14 +80,14 @@ int main(int argc, const char * argv[]) {
         }
         if(colorChar == 'W') // if it's W
         { // we set to white
-            color1 = Color(0,255,255);
+            color1 = Color(60,60,60);
             mainChar.setLocation(readR, readC, location);
             mainChar.setColor(readR, readC, color1);
             Two = true;
         }
         if(colorChar == 'B') // if it's B
         { // we set to blue
-            color1 = Color(0,0,255);
+            color1 = Color(0,45,255);
             mainChar.setLocation(readR, readC, location);
             mainChar.setColor(readR, readC, color1);
             Three = true;
