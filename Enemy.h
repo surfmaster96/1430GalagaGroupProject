@@ -4,7 +4,7 @@
 //  Assignment Description: Functions as a clone of Galaga.
 //  Due Date: 4/26/2018
 //  Date Created: 4/3/2018
-//  Date Last Modified: 4/3/2018
+//  Date Last Modified: 4/4/2018
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #ifndef Enemy_h
@@ -18,6 +18,7 @@ class Enemy{
     private:
         Color color[50][50];
         Point location[50][50];
+        int lives; 
     
     public:
         //************************************************************
@@ -29,7 +30,7 @@ class Enemy{
         Enemy();
     
         //************************************************************
-        // description: sets the enemy's locaiton                    *
+        // description: sets the enemy's location                    *
         // return: nothing to return                                 *
         // precondition: x, y, and myPoint are all valid             *
         // postcondition: sets enemy location to specified point     *
