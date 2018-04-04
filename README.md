@@ -35,6 +35,18 @@ To create a game using the SDL_Plotter framework that represents Galaga.
         //  Date Created: MM/DD/YYYY
         //  Date Last Modified: MM/DD/YYYY
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        
+### If Contributions Were Made
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //  Author: First Last
+        //  Assignment Title: Group Project
+        //  Assignment Description: Functions as a clone of Galaga.
+        //  Due Date: 4/26/2018
+        //  Date Created: MM/DD/YYYY
+        //  Date Last Modified: MM/DD/YYYY
+        //  Contributor: First Last
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Method Declarations
 
@@ -44,3 +56,18 @@ To create a game using the SDL_Plotter framework that represents Galaga.
         // precondition:                                             *
         // postcondition:                                            *
         //************************************************************
+        
+### Indicating Code Sections
+        // ## Segment Indication ##
+
+### Indicating What a Loop or If-Statement Does
+        while(some argument) // while ____ is true
+        { // perform action
+            ourAction();
+        }
+        
+        if(some argument) // if _____ is true
+        { // perform action
+            ourAction();
+        }
+        
