@@ -20,6 +20,12 @@ class Enemy{
         Point location[50][50];
     
     public:
+        //************************************************************
+        // description: Constructs an enemy in default setting       *
+        // return: nothing to return                                 *
+        // precondition: Enemy must be in the correct environment    *
+        // postcondition: An enemy is constructed with default values*
+        //************************************************************
         Enemy();
     
         //************************************************************
@@ -27,7 +33,6 @@ class Enemy{
         // return: nothing to return                                 *
         // precondition: x, y, and myPoint are all valid             *
         // postcondition: sets enemy location to specified point     *
-        //                                                           *
         //************************************************************
         void setLocation(int, int, Point);
         //************************************************************
@@ -35,7 +40,6 @@ class Enemy{
         // return: Point                                             *
         // precondition: x and y are valid                           *
         // postcondition: returns the enemy's location               *
-        //                                                           *
         //************************************************************
         Point getLocation(int x, int y) const;
     
@@ -44,7 +48,6 @@ class Enemy{
         // return: nothing to return                                 *
         // precondition: x, y, and myColor are all valid             *
         // postcondition: sets enemy's color at a specified point    *
-        //                                                           *
         //************************************************************
         void setColor(int, int, Color);
         //************************************************************
@@ -52,7 +55,6 @@ class Enemy{
         // return: Color                                             *
         // precondition: x and y are valid                           *
         // postcondition: returns the enemy's color at a location    *
-        //                                                           *
         //************************************************************
         Color getColor(int, int) const;
     
@@ -64,7 +66,6 @@ class Enemy{
         // return: nothing to return                                 *
         // precondition: g must be valid, enemy must be setup        *
         // postcondition: enemy is drawn to screen                   *
-        //                                                           *
         //************************************************************
         void draw(SDL_Plotter&);
         //************************************************************
@@ -72,7 +73,6 @@ class Enemy{
         // return: nothing to return                                 *
         // precondition: g must be valid, enemy must be setup        *
         // postcondition: enemy is displayed on screen               *
-        //                                                           *
         //************************************************************
         void display(SDL_Plotter&);
 };
