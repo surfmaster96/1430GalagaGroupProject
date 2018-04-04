@@ -44,7 +44,8 @@ To create a game using the SDL_Plotter framework that represents Galaga.
         //  Due Date: 4/26/2018
         //  Date Created: MM/DD/YYYY
         //  Date Last Modified: MM/DD/YYYY
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //  Contributor: First Last
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Method Declarations
 
