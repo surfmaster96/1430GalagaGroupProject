@@ -22,3 +22,25 @@ To create a game using the SDL_Plotter framework that represents Galaga.
 | Zixiao Li        |
 | Jiahao Xu        |
 | Evie Guay        |
+
+## Documentation Standards
+
+### Header Documentation
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //  Author: First Last
+        //  Assignment Title: Group Project
+        //  Assignment Description: Functions as a clone of Galaga.
+        //  Due Date: 4/26/2018
+        //  Date Created: MM/DD/YYYY
+        //  Date Last Modified: MM/DD/YYYY
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Method Declarations
+
+        //************************************************************
+        // description:                                              *
+        // return:                                                   *
+        // precondition:                                             *
+        // postcondition:                                            *
+        //************************************************************
