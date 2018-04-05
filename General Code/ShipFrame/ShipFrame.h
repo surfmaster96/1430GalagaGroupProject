@@ -10,8 +10,8 @@
 
 #ifndef ShipFrame_H
 #define ShipFrame_H
-#include "point.h"
-#include "color.h"
+#include "Point.h"
+#include "Color.h"
 #include "SDL_Plotter.h"
 
 
