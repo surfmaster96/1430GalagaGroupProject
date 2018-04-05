@@ -93,4 +93,5 @@ class Ship
         //************************************************************
         void display(SDL_Plotter&);
 };
+
 #endif /* Ship_H */
