@@ -38,6 +38,9 @@ int main(int argc, const char * argv[]) {
     char key;
     double bulletX =200, bulletY = 680;
     
+    // ## Background(Stars in progessing) ##
+    Ship background;
+    
     // ## Begin Bullet ##
     Bullet bullet1[20];
     Point bullet_1;
@@ -51,6 +54,7 @@ int main(int argc, const char * argv[]) {
     // ## Begin SDL Display Stuff ##
     while(!g.getQuit())
     {
+        background.draw(g);
         frame1.displayFrame(count1, move, frame1, g, bulletX, bulletY);
         if(g.kbhit())
         {
