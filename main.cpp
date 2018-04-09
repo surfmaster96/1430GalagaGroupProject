@@ -168,10 +168,10 @@ int main(int argc, const char * argv[]) {
                         temp = 0;
                     }
                     break;
-                case RIGHT_ARROW: frame1.eraseFrame(count1, move, frame1, g);
+                case RIGHT_ARROW: //frame1.eraseFrame(count1, move, frame1, g);
                     move += 20;
                     break;
-                case LEFT_ARROW: frame1.eraseFrame(count1, move, frame1, g);
+                case LEFT_ARROW: //frame1.eraseFrame(count1, move, frame1, g);
                     move -= 20;
                     break;
             }
