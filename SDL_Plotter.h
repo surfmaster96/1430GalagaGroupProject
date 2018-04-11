@@ -9,13 +9,13 @@
 #define SDL_PLOTTER_H_
 
 //OSX Library
-#include <SDL2/SDL.h>
-#include <SDL2_mixer/SDL_mixer.h>
-#include <SDL2/SDL_thread.h>
+//#include <SDL2/SDL.h>
+//#include <SDL2_mixer/SDL_mixer.h>
+//#include <SDL2/SDL_thread.h>
 
 //Windows Library
-//#include <SDL2/SDL.h>
-//#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include <string.h>
 #include <iostream>
@@ -48,7 +48,7 @@ struct param{
     SDL_cond *cond;
     SDL_mutex *mut;
     string name;
-    
+
     param(){
         play = false;
         running = false;
@@ -61,65 +61,65 @@ private:
     SDL_Texture * texture;
     SDL_Renderer * renderer;
     SDL_Window * window;
-    
+
     bool leftMouseButtonDown;
     Uint32 * pixels;
     const Uint8* currentKeyStates;
-    
+
     int row, col;
     bool quit;
     SDL_Event event;
-    
+
     //Sound Stuff
     bool SOUND;
     int soundCount;
     map<string, param> soundMap;
-    
+
 public:
-    
-    
-    
+
+
+
     SDL_Plotter(int r=480, int c=640, bool WITH_SOUND = true);
-    
-    
+
+
     ~SDL_Plotter();
-    
+
     void update();
-    
+
     bool getQuit();
-    
+
     bool kbhit();
-    
+
     char getKey();
-    
+
     void plotPixel(int x, int y, int r, int g, int b);
-    
+
     void clear();
-    
+
     int getRow();
-    
+
     int getCol();
-    
+
     void initSound(string sound);
-    
+
     void setQuit(bool flag);
-    
+
     void playSound(string sound);
-    
+
     void quitSound(string sound);
-    
+
     void Sleep(int ms);
-    
+
     bool getMouseClick(int& x, int& y);
-    
+
     bool getMouseDown(int& x, int& y);
-    
+
     bool getMouseUp(int& x, int& y);
-    
+
     bool getMouseMotion(int& x, int& y);
-    
+
     void getMouseLocation(int& x, int& y);
-    
+
 };
 
 
@@ -131,8 +131,8 @@ static int Sound(void *data){
     p->running = true;
     Mix_Chunk *gScratch = NULL;
     gScratch = Mix_LoadWAV( p->name.c_str() );
-    
-    
+
+
     while(p->running){
         SDL_mutexP( p->mut );
         SDL_CondWait(p->cond, p->mut);
@@ -140,7 +140,7 @@ static int Sound(void *data){
         p->play = false;
         SDL_mutexV(p->mut);
     }
-    
+
     Mix_FreeChunk( gScratch );
     p->running = false;
     return 0;
