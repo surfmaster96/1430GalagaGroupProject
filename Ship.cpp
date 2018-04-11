@@ -1,0 +1,71 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//  Author: Jiahao Xu
+//  Assignment Title: Group Project
+//  Assignment Description: Functions as a clone of Galaga.
+//  Due Date: 4/26/2018
+//  Date Created: 4/3/2018
+//  Date Last Modified: 4/4/2018
+//  Contributor: Andrew Zimmerman
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#include "Ship.h"
+
+// ## Begin Constructor ##
+Ship::Ship()
+{
+    for(int i = 0; i < 50;i++)
+    {
+        for(int j = 0; j < 50; j++)
+        {
+            color[i][j].R = 0;
+            color[i][j].B = 255;
+            color[i][j].G = 255;
+            location[i][j].X = 400+i;
+            location[i][j].Y = 400+j;
+        }
+    }
+}
+
+// ## Begin Color ##
+void Ship::setColor(int x, int y, Color c)
+{
+    color[x][y] = c;
+}
+
+Color Ship::getColor(int x, int y) const
+{
+    return color[x][y];
+}
+
+// ## Begin Location ##
+void Ship::setLocation(int x, int y, Point p)
+{
+    location[x][y] = p;
+}
+
+Point Ship::getLocation(int x, int y) const
+{
+    return location[x][y];
+}
+
+//*******Do not use draw or display, because it waste too many RAM and GPU.
+//Using Displayframe function instead.
+//Using draw function to draw the background.  ****Stars In Processing****
+void Ship::draw(SDL_Plotter& g)
+{
+    for(int j = 0; j < 700; j++)
+    {
+        for(int i = 0; i <700; i++)
+        {
+            g.plotPixel(i,j,0,0,0);
+        }
+    }
+}
+
+void Ship::display(SDL_Plotter& g)
+{
+    for(int j = 0; j < 500; j++)
+    {
+        g.plotPixel(location[j][j].X, location[j][j].Y, color[j][j].R, color[j][j].G, color[j][j].B);
+    }
+}
