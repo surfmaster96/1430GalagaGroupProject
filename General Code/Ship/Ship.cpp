@@ -50,13 +50,14 @@ Point Ship::getLocation(int x, int y) const
 
 //*******Do not use draw or display, because it waste too many RAM and GPU.
 //Using Displayframe function instead.
+//Using draw function to draw the background.  ****Stars In Processing****
 void Ship::draw(SDL_Plotter& g)
 {
-    for(int j = 0; j < 50; j++)
+    for(int j = 0; j < 700; j++)
     {
-        for(int i = 0; i <50; i++)
+        for(int i = 0; i <700; i++)
         {
-            g.plotPixel(location[i][j].X, location[i][j].Y, color[i][j].R, color[i][j].G, color[i][j].B);
+            g.plotPixel(i,j,0,0,0);
         }
     }
 }
