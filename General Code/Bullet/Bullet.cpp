@@ -5,7 +5,7 @@
 //  Due Date: 4/26/2018
 //  Date Created: 4/3/2018
 //  Date Last Modified: 4/4/2018
-//  Contributor: Andrew Zimmerman
+//  Contributor: Andrew Zimmerman, Jiahao Xu
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #include "Bullet.h"
@@ -48,9 +48,12 @@ void Bullet::setShot(Point p)
     {
         Shot[i].X = p.X + m;
         Shot[i].Y = p.Y + n;
+        if(i == 2){
+            location = Shot[i];
+        }
         m++;
         // Wait time for Bullet is M % 5
-        if((m % 5) == 0)
+        if((m % 3) == 0)
         {
             n++;
             m = 0;
@@ -63,17 +66,47 @@ Point Bullet::getShot(int x) const
     return Shot[x];
 }
 
+void Bullet::setLocation(Point p, double speed){
+    p.Y -= speed;
+    location = p;
+}
+
+Point Bullet::getLocation() const{
+    return location;
+}
+
+
+
+
+
 // ## Begin Display / Erase ##
-void Bullet::displayBullet(int BulletSpeed, Bullet myBullet, SDL_Plotter& g)
+void Bullet::displayBullet(int BulletSpeed, SDL_Plotter& g)
 {
-    int x = 100;
+    
+    //Calculation
+    //1   2   3   4   5;
+    //6   7   8   9   10;
+    //11  12  13  14  15;
+    //5 6-10 11-15 16-20 21-25 26-30
+    int x = 38;
     double m, n;
-    for(int i = 0; i < x; i++)
+    for(int i = 0; i <= x; i++)
     {
-        m = Shot[i].X;
-        n = Shot[i].Y;
-        n -= BulletSpeed;
-        g.plotPixel(m, n, 100, 50, 120);
+        if(i  < 15){
+            m = Shot[i].X;
+            n = Shot[i].Y;
+            n -= BulletSpeed;
+            if(i == 2){
+                location.Y = n;
+            }
+            g.plotPixel(m, n, 213, 123, 204);
+        }
+        else{
+            m = Shot[i].X;
+            n = Shot[i].Y;
+            n -= BulletSpeed;
+            g.plotPixel(m, n, 255, 255, 150);
+        }
     }
 }
 
