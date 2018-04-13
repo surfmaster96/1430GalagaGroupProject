@@ -23,3 +23,8 @@ Point::Point(int x, int y)
     X = x;
     Y = y;
 }
+void Point::setPoint(int x, int y){
+    X = x;
+    Y = y;
+}
+

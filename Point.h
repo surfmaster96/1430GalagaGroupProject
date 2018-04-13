@@ -30,6 +30,11 @@ struct Point
     // postcondition: A point is constructed with X and Y        *
     //************************************************************
     Point(int, int);
+    void setPoint(int x, int y);
+    
 };
 
+
+
 #endif // POINT_H_INCLUDED
+

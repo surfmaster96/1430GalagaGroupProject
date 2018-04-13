@@ -8,7 +8,7 @@
 //  Contributor: Andrew Zimmerman
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#include "Ship.h"
+#include "ship.h"
 
 // ## Begin Constructor ##
 Ship::Ship()
@@ -50,16 +50,31 @@ Point Ship::getLocation(int x, int y) const
 
 //*******Do not use draw or display, because it waste too many RAM and GPU.
 //Using Displayframe function instead.
-//Using draw function to draw the background.  ****Stars In Processing****
+//Do not using srand(time(0))!!!
 void Ship::draw(SDL_Plotter& g)
 {
+    static bool sky = true;
     for(int j = 0; j < 700; j++)
     {
+        int a, b;
         for(int i = 0; i <700; i++)
         {
             g.plotPixel(i,j,0,0,0);
+            
         }
+        //This is the Shine-shine code.
+        if(j % 53 == 0){
+            a = 20 + rand()%680;
+            b = 20 + rand()%680;
+            ////g.plotPixel(a, b, 255, rand()%255, rand()%255);
+            //g.plotPixel(a+1, b, 155, rand()%255, rand()%255);
+            g.plotPixel(a-1, b, 255, rand()%255, rand()%255);
+            //g.plotPixel(a, b+1, 55, rand()%255, rand()%255);
+            //g.plotPixel(a, b-1, 255, rand()%255, rand()%255);
+        }
+        
     }
+    
 }
 
 void Ship::display(SDL_Plotter& g)
@@ -69,3 +84,4 @@ void Ship::display(SDL_Plotter& g)
         g.plotPixel(location[j][j].X, location[j][j].Y, color[j][j].R, color[j][j].G, color[j][j].B);
     }
 }
+
