@@ -1,0 +1,18 @@
+17
+. . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . .
+. . . . . . . . B . . B . . . . .
+. . . . . . B B p p B . . . . . .
+. . . B B p p B p p . . . . . . .
+. . . . B B p B B B B B B . . . .
+. . . . . . B P B P P B B B . B .
+. . . . B B P P P P P B B B B . .
+. . . . B B P P P P P P . B B . .
+. . . B B B B P P P P . . B B . .
+. . B B B B . P p . p . . B B . .
+. . . B B B . . p . p . B B B . .
+. . . . B B . . . . . . . B B . .
+. . . . B B B B . . . . B B . . .
+. . . . . . B B B . . . B . . . .
+. . . . . . . B B B . B . . . . .
+. . . . . . . . . B . . . . . . .
