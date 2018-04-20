@@ -1,0 +1,52 @@
+43 
+. . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . . . . . .
+. . . . . . . . . Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . . . . . . .
+. . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . . . . .
+. . . . . . . . . . Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . . . . . .
+. . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . . . .
+. . . . . . . . . . . Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . . . . .
+. . . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . . .
+. . . . . . . . . . . . Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . . . .
+. . . . . . . . . . . . Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . .
+. . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . . . . .
+. . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . . . . . .
+. . . . . . . . . y . Y Y Y Y Y Y Y Y Y y . y Y Y Y Y Y Y y . . . . . . . . . . . . .
+. . . . . . . . y Y . y Y Y Y Y Y Y Y y . y . y Y Y Y Y Y Y . . . y . . . . . . . . .
+. . . . . . . y Y Y . . Y Y Y Y Y Y y . y Y y . y Y y Y Y Y y . . Y y . . . . . . . .
+. . . . . . y Y Y Y . . . y Y Y Y y . y Y Y Y y . y Y Y y Y . . . Y Y y . . . . . . .
+. . . . . y Y Y Y Y . . y . y Y Y . y Y Y Y Y Y y . Y Y y . y . . . Y Y Y y . . . . .
+. . . . y Y Y Y Y y . y Y . y . Y y . . y Y y . . y y . y . Y y . . Y Y Y Y y . . . .
+. . . y Y Y Y Y y . y Y Y . . y . y y . y Y y . Y Y . y . . Y Y y . y Y Y Y Y y . . .
+. . y Y Y Y Y y . y Y Y y . y Y . . . . y Y y . . . . Y y . y Y Y y . y Y Y Y Y y . .
+. y Y Y Y Y y . y Y Y y . y y Y y y y y y Y y y y y y Y Y y . y Y Y y . y Y Y Y Y y .
+y Y Y Y Y Y . y Y Y Y . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . Y Y Y y . Y Y Y Y Y y
+. y Y Y Y Y y . y Y Y y . y Y Y y y y y y Y y y y y y Y Y y . y Y Y y . y Y Y Y Y y .
+. . y Y Y Y Y y . y Y Y y . y Y . . . . y Y y . . . . Y y . y Y Y y . y Y Y Y y y . .
+. . . y Y Y Y Y y . y Y Y . . y . Y Y . y Y y . Y Y . y . . Y Y y . y Y Y Y Y y . . .
+. . . . y Y Y Y Y y . y Y . . . . y . . y Y y . . y y . y . Y y . . Y Y Y Y y . . . .
+. . . . . y Y Y Y Y . . y . . . . . y Y Y Y Y Y y . Y Y Y . y . y . Y Y Y y . . . . .
+. . . . . . y Y Y Y . . . . . y Y y . y Y Y Y y . y Y Y Y y . y Y . Y Y y . . . . . .
+. . . . . . . y Y Y . . . . . . Y Y y . y Y y . y Y Y Y Y Y y . . . Y y . . . . . . .
+. . . . . . . . y Y . . . . . . y Y Y y . y . y Y Y Y Y Y Y Y y . . y . . . . . . . .
+. . . . . . . . . y . . . . . . . Y Y Y y . y Y Y Y Y Y Y Y Y Y . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . Y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . Y Y Y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . .
+. . . . . . . . . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . y Y Y Y Y Y Y Y Y Y Y Y . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . y Y Y Y Y Y Y Y Y Y y . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . y Y Y Y Y Y Y Y Y . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . y Y Y Y Y Y Y y . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . y Y Y Y Y Y . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . y Y Y Y y . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . y Y Y y . . . . . . . .
+
+
+
+
+
+
+
+

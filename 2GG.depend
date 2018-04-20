@@ -1,0 +1,98 @@
+# depslib dependency file v1.0
+1524154955 source:d:\chi\2gg\bullet.cpp
+	"Bullet.h"
+
+1524154955 d:\chi\2gg\bullet.h
+	"Point.h"
+	"Color.h"
+	"SDL_Plotter.h"
+	"Ship.h"
+
+1524154955 d:\chi\2gg\point.h
+
+1524154955 d:\chi\2gg\color.h
+
+1522210724 d:\chi\2gg\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1524154955 d:\chi\2gg\ship.h
+	"Point.h"
+	"Color.h"
+	"SDL_Plotter.h"
+	<cstdlib>
+	<ctime>
+
+1524154955 source:d:\chi\2gg\color.cpp
+	"Color.h"
+
+1524162827 source:d:\chi\2gg\drawshape.cpp
+	"drawShape.h"
+
+1524162827 d:\chi\2gg\drawshape.h
+	"Constants.h"
+	<string>
+	<iostream>
+	"SDL_Plotter.h"
+	<sstream>
+	<fstream>
+
+1524162825 d:\chi\2gg\constants.h
+
+1524154955 source:d:\chi\2gg\point.cpp
+	"Point.h"
+
+1522210721 source:d:\chi\2gg\sdl_plotter.cpp
+	"SDL_Plotter.h"
+
+1524154955 source:d:\chi\2gg\ship.cpp
+	"ship.h"
+
+1524154955 source:d:\chi\2gg\shipframe.cpp
+	"ShipFrame.h"
+
+1524154955 d:\chi\2gg\shipframe.h
+	"Point.h"
+	"Color.h"
+	"SDL_Plotter.h"
+
+1524154955 source:d:\chi\2gg\trivialstaff.cpp
+	"TrivialStaff.h"
+	"Point.h"
+	"Color.h"
+	"SDL_Plotter.h"
+	"ShipFrame.h"
+	"ship.h"
+	<fstream>
+	<string>
+	<ostream>
+
+1524154956 d:\chi\2gg\trivialstaff.h
+	"Point.h"
+	"Color.h"
+	"SDL_Plotter.h"
+	"ShipFrame.h"
+	"ship.h"
+	"Bullet.h"
+	<fstream>
+	<string>
+	<ostream>
+	<cmath>
+
+1524164031 source:d:\chi\2gg\main.cpp
+	<iostream>
+	"SDL_Plotter.h"
+	"Bullet.h"
+	"Color.h"
+	"drawShape.h"
+	"Point.h"
+	"Ship.h"
+	"ShipFrame.h"
+	"TrivialStaff.h"
+	"Constants.h"
+
