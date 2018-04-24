@@ -7,228 +7,424 @@
 //  Date Last Modified: 4/4/2018
 //  Contributor: Andrew Zimmerman
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/*
+ ****************            Read me          *****************
+ How to print an (.txt) picture on screen
+ (the picture should looks like this
+ 012345678901234567890123456789
+ ....R...RR.......RRR....W...R.
+ ....R..RRRRRRRRRRR.RRR..RR..R.
+ ....RR.RRWWRRR.RRRRWWWRRRR.W..
+ .....RRRRRWWRRRRRWWWRRRR..WW..
+ ..RRRRRRWWWWRRRRRWRR..R.WWW...
+ .RRRRRRRRRRRRRR.RRR.RRRRWRW...
+ ...RR.RRR..RRRRRRRRRRR..RR....
+ ..RR.RRRWRRRRRRRRRRRRR..RRWW..
+ ..R.RR.WWRRR.RWWRR.RWWRRRRWWR.
+ ...RRRRRRW...RWWWRRWWWWRRRR.R.
+ ...RRWRRWW....RRRRWRRRRRR...R.
+ .RRRRWWRR.....RRRWWWRRRR....R.
+ .............RRRRRWWRRR.......
+ ............RR.RRRRR..........
+ .............R...R............
+ )
+ 1.ShipFrame name;
+ 2.handleShipUI(string filename, Point start, ShipFrame& name);
+ 
+ then in while(!getQuit()) loop you got 2 choices between spaceship and bugs.
+ 3. spaceship: name.displayFrame(int moveSpeed, SDL_Plotter& g);
+ bugs: name.displayBugs(double moveX_Speed, double moveY_Speed, SDL_Plotter& g, bool& fall);
+ */
 
 #include <iostream>
 #include <fstream>
+#include "Time.h"
+#include <ctime>
 #include "SDL_Plotter.h"
-#include "Ship.h"
+#include "ship.h"
 #include "Point.h"
 #include "ShipFrame.h"
 #include "Bullet.h"
+#include "TrivialFunctions.h"
 
 using namespace std;
 
-void handleShipUI(ifstream&, Point&, Color&, int&, ShipFrame&, int&);
+//******************
+const int SCREEN_FPS = 100;
+const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
+const int SCREEN_WIDTH = 700;
+const int SCREEN_DEEP = 700;
+
+
+//******************
 void handleBullet(bool[], Bullet[], int[], SDL_Plotter&);
 void handlePlotter();
 
 int main(int argc, const char * argv[]) {
+    //Time ....
+    
+    
     // ## Main Stuff ##
     ifstream readIn;
-    SDL_Plotter g(700,700);
+    SDL_Plotter g(SCREEN_DEEP, SCREEN_WIDTH);
+    char key;
     
     // ## Begin Ship Display ##
-    int count1 = 0, column = 50;
     Point location;
     
     // ## Begin Ship Display Array ##
     ShipFrame frame1;
-    Color color1;
+    Point shipX(200, 600);
     int move = 0;
-    char key;
-    double bulletX =200, bulletY = 680;
+    
+    // ## Background(Stars in progessing) ##
+    Ship background;
+    ShipFrame fire;
+    
+    Point Start(0,0);
+    
+    
+    //**  Bugs ** and power************
+    ShipFrame bugs[5];
+    int iku = 20; //(use for testing).
+    int Yiku = 0;
+    int Ykuru = 0;
+    Point bugX[5];
+    Point tempPoint;
+    bugX[0].setPoint(100, 100);
+    bugX[1].setPoint(150, 150);
+    bugX[2].setPoint(250, 150);
+    bugX[3].setPoint(200, 150);
+    bugX[4].setPoint(300, 100);
+    int moveX = 3;
+    int moveY = 1;
     
     // ## Begin Bullet ##
-    Bullet bullet1[20];
-    Point bullet_1;
-    bool bulletOne[20] = {false};
-    int bulletSpeed[20] = {0};
+    Bullet bullet1[20], bullet2[20];
+    Point bullet_1,bullet_2;
+    int BuSPEEDA = 10;
     bool xChange = false;
     int bulletNum = 0, temp = 0;
     
-    handleShipUI(readIn, location, color1, count1, frame1, column);
+    // ## play music
+    g.initSound("shoot.wav");
+    g.initSound("bb2.wav");
+    g.Sleep(120);
+    g.playSound("bb2.wav");
+    //
+    bool Xshield = false;
+    bool XMaxwell = false;
+    ShipFrame shield, shieldUp, Maxwell;
     
+    
+    // Loading all the shapes.
+    
+    
+    handleShipUI("fireshape.txt", Start, fire);
+    handleShipUI("shieldUp.txt", Start, shieldUp);
+    handleShipUI("Shape2.txt", shipX, frame1);
+    for(int z = 0; z<= 2; z++){
+        handleShipUI("enemy.txt", bugX[z], bugs[z]);
+        //cout <<bugs[z].midNum<<endl;
+    }
+    handleShipUI("EnemyB8.txt" , bugX[3], bugs[3]);
+    handleShipUI("EnemyC7.txt" , bugX[4], bugs[4]);
     // ## Begin SDL Display Stuff ##
-    while(!g.getQuit())
-    {
-        frame1.displayFrame(count1, move, frame1, g, bulletX, bulletY);
-        if(g.kbhit())
+    //*****************Time**********
+    //The frames per second timer
+    LTimer fpsTimer;
+    
+    //The frames per second cap timer
+    LTimer capTimer;
+    
+    //In memory text stream
+    std::stringstream timeText;
+    
+    //Start counting frames per second
+    int countedFrames = 0;
+    fpsTimer.start();
+    //********************************
+    while(!g.getQuit()){
+        //Start cap timer
+        capTimer.start();
+        
+        //Calculate and correct fps
+        float avgFPS = countedFrames / ( fpsTimer.getTicks() / 1000.f );
+        if( avgFPS > 2000000 )
         {
-            key = g.getKey();
-            switch(key)
-            {
-                case ' ':
-                    bulletNum = temp;
-                    bulletOne[bulletNum] = true;
-                    temp++;
-                    xChange = true;
-                    if(xChange)
-                    {
-                        bullet_1.X = bulletX;
-                        xChange = false;
-                    }
-                    bullet_1.Y = bulletY;
-                    bullet1[bulletNum].setShot(bullet_1);
-                    if(temp == 5)
-                    {
-                        temp = 0;
-                    }
-                    break;
-                case RIGHT_ARROW: frame1.eraseFrame(count1, move, frame1, g);
-                    move += 20;
-                    break;
-                case LEFT_ARROW: frame1.eraseFrame(count1, move, frame1, g);
-                    move -= 20;
-                    break;
+            avgFPS = 0;
+        }
+        
+        //*************************
+        background.draw(g);
+        //shield.displayFrame(0, g);
+        //*****************************
+        
+        
+        frame1.displayFrame(move, g);
+        if(Xshield){
+            
+        }
+        //****************************
+        //bugs[1].displayBugs(iku += moveX, 0, g, fall[1]);
+        iku += moveX;
+        Yiku += moveY;
+        //Testing bugs[0] as a power bringer.
+        if(!bugs[0].getbugsfall()){
+            bugs[0].findBullet(bullet1, 16);
+            bugs[0].findBullet(bullet2, 16);
+            bugs[0].drawPowerBugs(iku, Yiku, g, shield, fire);
+            if(bugs[0].getbugsfall()){
+                Point FallPoint = shield.getCenter();
+                handleShipUI("shield.txt", FallPoint, shield);
+                shieldUp.displayPowerUp(g, FallPoint);
+            }
+        }
+        else if(shield.getbugsfall()){
+            frame1.findPower(shield, Maxwell, Xshield, XMaxwell);
+            shield.drawPower(0, Ykuru +=1, g, shieldUp);
+            if(Xshield){
+                //Give up on this part, we just change the
+                // ships color.
+                changeImage("Shape2S2.txt", frame1);
             }
         }
         
-        handleBullet(bulletOne, bullet1, bulletSpeed, g);
+        /*
+        if(!bugs[0].getbugsfall()){
+            bugs[0].findBullet(bullet1, 16);
+            bugs[0].findBullet(bullet2, 16);
+            bugs[0].drawBugs(iku, Yiku, g, fire);
+        }
+        else{
+            //Make a reborn of  bugs
+            if(clock()%6000>=5000){
+                handleShipUI("shield1.txt", bugX[0], bugs[0]);
+                bugs[0].setbugsfall(false);
+            }
+        }
+         */
         
-        g.update();
+        
+        if(!bugs[1].getbugsfall()){
+            bugs[1].findBullet(bullet1, 16);
+            bugs[1].findBullet(bullet2, 16);
+            bugs[1].drawBugs(iku, Yiku, g, fire);
+        }
+        if(!bugs[2].getbugsfall()){
+            bugs[2].findBullet(bullet1, 16);
+            bugs[2].findBullet(bullet2, 16);
+            bugs[2].drawBugs(iku, Yiku, g, fire);
+        }
+        if(!bugs[3].getbugsfall()){
+            bugs[3].findBullet(bullet1, 16);
+            bugs[3].findBullet(bullet2, 16);
+            bugs[3].drawBugs(iku, Yiku, g, fire);
+        }
+        if(!bugs[4].getbugsfall()){
+            bugs[4].findBullet(bullet1, 16);
+            bugs[4].findBullet(bullet2, 16);
+            bugs[4].drawBugs(iku, Yiku, g, fire);
+        }
+        
+        //.....................
+        for(int z = 0; z <=4; z++){
+            if(bugs[z].getCenter().X >= 640){
+                moveX = -1;
+            }
+            if(bugs[z].getCenter().X <= 5){
+                moveX = 1;
+            }
+            if(bugs[z].getCenter().Y >= 400){
+                moveY = -3;
+                moveX = bugs[z].getCenter().X % 5 +1;
+            }
+            if(bugs[z].getCenter().Y <= 10){
+                moveY += 3;
+                moveX = -bugs[z].getCenter().Y % 5;
+            }
+        }
+        
+        
+            //bugs[0].displayBugs(iku += moveX, 0, g, fall[0]);
+            //.....................
+            //cout<<"This is Bugs: "<<bugs.getCenter().X<<": "<<bugs.getCenter().Y<<endl;
+            if(g.kbhit())
+            {
+                key = g.getKey();
+                switch(key)
+                {
+                    case ' ':
+                        bulletNum = temp;
+                        bullet1[bulletNum].setBfire(true);
+                        bullet2[bulletNum].setBfire(true);
+                        bullet1[bulletNum].setSpeed(0);
+                        bullet2[bulletNum].setSpeed(0);
+                        temp++;
+                        xChange = true;
+                        if(xChange)
+                        {
+                            bullet_1.X = frame1.getCenter().X-13;
+                            bullet_2.X = frame1.getCenter().X+12;
+                            xChange = false;
+                        }
+                        bullet_1.Y = frame1.getCenter().Y+6;
+                        bullet_2.Y = frame1.getCenter().Y+6;
+                        bullet1[bulletNum].setShot(bullet_1);
+                        bullet2[bulletNum].setShot(bullet_2);
+                        if(temp >= 15)
+                        {
+                            temp = 0;
+                        }
+                        //play music for shooting
+                        g.playSound("shoot.wav");
+                        break;
+                        
+                        
+                    case RIGHT_ARROW: //frame1.eraseFrame(count1, move, frame1, g);
+                        move += 20;
+                        break;
+                    case LEFT_ARROW: //frame1.eraseFrame(count1, move, frame1, g);
+                        move -= 20;
+                        break;
+                }
+            }
+            
+            
+            
+            
+        // ## Begin Bullet ##     BuSPEEDA;
+            //Need Move Ship to get coordinate for bullet. ***FIXED***
+            //Need change Bullet to arrary style to make anothor shot--Partilly FIXED
+        /*
+        bullet1[0].displayBullet(BuSPEEDA,  g);
+        bullet1[1].displayBullet(BuSPEEDA,  g);
+        bullet1[2].displayBullet(BuSPEEDA,  g);
+        bullet1[3].displayBullet(BuSPEEDA,  g);
+        bullet1[4].displayBullet(BuSPEEDA,  g);
+        bullet1[5].displayBullet(BuSPEEDA,  g);
+        bullet1[6].displayBullet(BuSPEEDA,  g);
+        bullet1[7].displayBullet(BuSPEEDA,  g);
+        bullet1[8].displayBullet(BuSPEEDA,  g);
+        bullet1[9].displayBullet(BuSPEEDA,  g);
+        bullet1[10].displayBullet(BuSPEEDA, g);
+        bullet1[11].displayBullet(BuSPEEDA, g);
+        bullet1[12].displayBullet(BuSPEEDA, g);
+        bullet1[13].displayBullet(BuSPEEDA, g);
+        bullet1[14].displayBullet(BuSPEEDA, g);
+        bullet1[15].displayBullet(BuSPEEDA, g);
+        */
+        
+        for(int i = 0; i <= 15; i++){
+            bullet1[i].displayBullet(BuSPEEDA, g);
+            bullet2[i].displayBullet(BuSPEEDA, g);
+        }
+        /*
+            if(bulletOne[1]){
+                //bullet1[1].eraseFlash(bulletSpeed[1], bullet1[1],g);
+                bulletSpeed[1] += BuSPEEDA;//Bullte Speed***********
+                
+                bullet1[1].displayBullet(bulletSpeed[1], g);
+                bullet2[1].displayBullet(bulletSpeed[1], g);
+                //attack(Target, bullet1[1], 15, fire, g, fall);
+                //cout << bullet1[1].getLocation().Y <<endl;
+                if((bulletSpeed[1]) >= 600){
+                    //bullet1[1].eraseFlash(bulletSpeed[1], bullet1[1],g);
+                    bulletOne[1] = false;
+                    bulletSpeed[1] = 0;
+                }
+            }
+            if(bulletOne[2]){
+                //bullet1[2].eraseFlash(bulletSpeed[2], bullet1[2],g);
+                bulletSpeed[2] += BuSPEEDA;//Bullte Speed***********
+                
+                bullet1[2].displayBullet(bulletSpeed[2], g);
+                bullet2[2].displayBullet(bulletSpeed[2], g);
+                //attack(Target, bullet1[2], 15, fire, g, fall);
+                if((bulletSpeed[2]) >= 600){
+                    //bullet1[2].eraseFlash(bulletSpeed[2], bullet1[2],g);
+                    bulletOne[2] = false;
+                    bulletSpeed[2] = 0;
+                }
+            }
+            if(bulletOne[3]){
+                //bullet1[3].eraseFlash(bulletSpeed[3], bullet1[3],g);
+                bulletSpeed[3] += BuSPEEDA;//Bullte Speed***********
+                
+                bullet1[3].displayBullet(bulletSpeed[3], g);
+                bullet2[3].displayBullet(bulletSpeed[3], g);
+                //attack(Target, bullet1[3], 15, fire, g, fall);
+                if((bulletSpeed[3]) >= 600){
+                    //bullet1[3].eraseFlash(bulletSpeed[3], bullet1[3],g);
+                    bulletOne[3] = false;
+                    bulletSpeed[3] = 0;
+                }
+            }
+            if(bulletOne[4]){
+                //bullet1[4].eraseFlash(bulletSpeed[4], bullet1[4],g);
+                bulletSpeed[4] += BuSPEEDA;//Bullte Speed***********
+                
+                bullet1[4].displayBullet(bulletSpeed[4], g);
+                bullet2[4].displayBullet(bulletSpeed[4], g);
+                //attack(Target, bullet1[4], 15, fire, g, fall);
+                if((bulletSpeed[4]) >= 600){
+                    //bullet1[4].eraseFlash(bulletSpeed[4], bullet1[4],g);
+                    bulletOne[4] = false;
+                    bulletSpeed[4] = 0;
+                }
+            }
+            if(bulletOne[0]){
+                //bullet1[0].eraseFlash(bulletSpeed[0], bullet1[0],g);
+                bulletSpeed[0] += BuSPEEDA;//Bullte Speed***********
+                
+                bullet1[0].displayBullet(bulletSpeed[0], g);
+                bullet2[0].displayBullet(bulletSpeed[0], g);
+                attack(bugs[0].getCenter(), bullet1[0], 50, fire, g, fall[0]);
+                if((bulletSpeed[0]) >= 600 ||fall[0]){
+                    //bullet1[0].eraseFlash(bulletSpeed[0], bullet1[0],g);
+                    bulletOne[0] = false;
+                    //test = true;
+                    bulletSpeed[0] = 0;
+                }
+            }
+            if(bulletOne[5]){
+                //bullet1[4].eraseFlash(bulletSpeed[4], bullet1[4],g);
+                bulletSpeed[5] += BuSPEEDA;//Bullte Speed***********
+                
+                bullet1[5].displayBullet(bulletSpeed[5], g);
+                bullet2[5].displayBullet(bulletSpeed[5], g);
+                //attack(Target, bullet1[5], 15, fire, g, fall);
+                if((bulletSpeed[5]) >= 600){
+                    //bullet1[5].eraseFlash(bulletSpeed[5], bullet1[5],g);
+                    bulletOne[5] = false;
+                    bulletSpeed[5] = 0;
+                }
+            }
+         */
+            g.update();
+        
+            //
+            ++countedFrames;
+            //If frame finished early
+            int frameTicks = capTimer.getTicks();
+            if( frameTicks < SCREEN_TICK_PER_FRAME )
+            {
+                //Wait remaining time
+                SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
+            }
+        
+        
     }
+    
     
     return 0;
 }
 
-void handleShipUI(ifstream& readIn, Point& location, Color& color1, int& count1, ShipFrame& frame1, int& column)
-{
-    string junkLine;
-    Ship mainChar;
-    Point shipX(200, 600);
-    int readRow = 0, readCol = 0;
-    char colorChar;
-    bool one = false, two = false, three = false;
-    
-    // ## Begin Read of Design ##
-    readIn.open("Shape2.txt");
-    if(!readIn)
-    {
-        cout << "Error: Reading of Ship Shape failed." << endl;
-    }
-    
-    getline(readIn, junkLine);
-    
-    while(readIn >> colorChar)
-    {
-        // Ship's Location
-        location = Point(shipX.X + readCol, shipX.Y+readRow);
-        
-        /*
-         If you need more colors, just simply copy the if statement and change
-         color1's value to make a new color.
-         */
-        
-        if(colorChar == 'R') // if it's R
-        { // we set to red
-            color1 = Color(255,0,0);
-            
-            mainChar.setLocation(readRow, readCol, location);
-            mainChar.setColor(readRow, readCol, color1);
-            one = true;
-        }
-        if(colorChar == 'W') // if it's W
-        { // we set to white
-            color1 = Color(0,255,255);
-            mainChar.setLocation(readRow, readCol, location);
-            mainChar.setColor(readRow, readCol, color1);
-            two = true;
-        }
-        if(colorChar == 'B') // if it's B
-        { // we set to blue
-            color1 = Color(0,0,255);
-            mainChar.setLocation(readRow, readCol, location);
-            mainChar.setColor(readRow, readCol, color1);
-            three = true;
-        }
-        
-        // ## Bullet Related ##
-        if(one||two||three) // If One, Two or Three are true
-        { // set frame1 to a new location and new color and iterate count1.
-            frame1.setLocation(count1, location);
-            frame1.setColor(count1, color1);
-            count1++;
-            /*
-             We take divisor of count1, then we can get some Point of
-             the "fire" Point, which can be used for creating bullet.
-             */
-        }
-        
-        readCol++;
-        //Need The Matirx Information!!!
-        if(readCol % column == 0)
-        {
-            readRow++;
-            readCol = 0;
-        }
-        
-        one = two = three = false;
-    }
-    readIn.close(); // close our open file.
-    cout << "Successfully Reading File, \n converting..." << endl;
-    cout << count1 << endl;
-}
 
-void handleBullet(bool bulletOne[], Bullet bullet1[], int bulletSpeed[], SDL_Plotter& g)
+
+void handleBullet(bool bulletOne[], Bullet bullet1[], Bullet bullet2[], int bulletSpeed[], SDL_Plotter& g)
 {
-    // ## Begin Bullet ##
-    //Need Move Ship to get coordinate for bullet. ***FIXED***
-    //Need change Bullet to arrary style to make anothor shot--Partilly FIXED
-    if(bulletOne[1]){
-        bullet1[1].eraseBullet(bulletSpeed[1], bullet1[1], g);
-        bulletSpeed[1] += 5;//Bullet speed
-        
-        bullet1[1].displayBullet(bulletSpeed[1], bullet1[1], g);
-        if((bulletSpeed[1]) >= 600){
-            bullet1[1].eraseBullet(bulletSpeed[1], bullet1[1], g);
-            bulletOne[1] = false;
-            bulletSpeed[1] = 0;
-        }
-    }
-    if(bulletOne[2]){
-        bullet1[2].eraseBullet(bulletSpeed[2], bullet1[2], g);
-        bulletSpeed[2] += 5;// Bullet speed
-        
-        bullet1[2].displayBullet(bulletSpeed[2], bullet1[2], g);
-        if((bulletSpeed[2]) >= 600){
-            bullet1[2].eraseBullet(bulletSpeed[2], bullet1[2], g);
-            bulletOne[2] = false;
-            bulletSpeed[2] = 0;
-        }
-    }
-    if(bulletOne[3]){
-        bullet1[3].eraseBullet(bulletSpeed[3], bullet1[3], g);
-        bulletSpeed[3] += 5;// Bullet speed
-        
-        bullet1[3].displayBullet(bulletSpeed[3], bullet1[3], g);
-        if((bulletSpeed[3]) >= 600){
-            bullet1[3].eraseBullet(bulletSpeed[3], bullet1[3], g);
-            bulletOne[3] = false;
-            bulletSpeed[3] = 0;
-        }
-    }
-    if(bulletOne[4]){
-        bullet1[4].eraseBullet(bulletSpeed[4], bullet1[4], g);
-        bulletSpeed[4] += 5;//Bullet speed
-        
-        bullet1[4].displayBullet(bulletSpeed[4], bullet1[4], g);
-        if((bulletSpeed[4]) >= 600){
-            bullet1[4].eraseBullet(bulletSpeed[4], bullet1[4], g);
-            bulletOne[4] = false;
-            bulletSpeed[4] = 0;
-        }
-    }
-    if(bulletOne[0]){
-        bullet1[0].eraseBullet(bulletSpeed[0], bullet1[0], g);
-        bulletSpeed[0] += 5;//Bullet speed
-        
-        bullet1[0].displayBullet(bulletSpeed[0], bullet1[0], g);
-        if((bulletSpeed[0]) >= 600){
-            bullet1[0].eraseBullet(bulletSpeed[0], bullet1[0],g);
-            bulletOne[0] = false;
-            bulletSpeed[0] = 0;
-        }
-    }
+    
 }
 
 void handlePlotter(SDL_Plotter& g)
